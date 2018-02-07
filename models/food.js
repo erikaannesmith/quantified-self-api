@@ -7,12 +7,20 @@ var Food = {
   .then(foods => {
     return foods.rows
   }),
-    new: function(name, calories) {
+
+  new: function(name, calories) {
     return database.raw('INSERT INTO foods (name, calories) VALUES (?,?) RETURNING *',
     [name, calories])
 
   .then(function(food) {
     return food.rows[0]
+  })
+  },
+
+  find: function(id) {
+    return database.raw('SELECT * FROM foods WHERE id = ?', [id])
+  .then(function(food) {
+      return food.rows[0]
   })
   }
 }

@@ -21,6 +21,20 @@ function create(req, res, next) {
   })
 }
 
+function show(req, res, next) {
+  let id = req.params.id
+
+  Food.find(id)
+  .then(food => {
+    if (!food) {
+      return res.sendStatus(404)
+    } else {
+      res.json(food)
+    }
+  })
+
+}
 
 
-module.exports = {index, create}
+
+module.exports = {index, create, show}

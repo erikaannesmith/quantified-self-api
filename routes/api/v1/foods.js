@@ -3,22 +3,32 @@ const router = express.Router();
 const environment = process.env.NODE_ENV || 'development'
 const configuration = require('../../../knexfile')[environment]
 const database = require('knex')(configuration)
+const foodsController = require('../../../controllers/foodsController')
 
+router.get('/', foodsController.index);
 
-router.get('/', function(req, res, next) {
-  database.raw('SELECT * FROM foods')
-  .then(foods => {
-    res.status(201).json(foods.rows)
-  });
-});
+// router.post('/', foodsController.create);
 
-router.post('/', function(req, res) {
-let name = req.body.name
-let calories = req.body.calories
+router.post('/', function(req, res, next) {
+
+  let name = req.body.name
+  let calories = req.body.calories
+
+  if(!name) {
+    return res.status(422).send({error: "Both name and calories are required fields."})
+  }
 
   database.raw('INSERT INTO foods (name, calories) VALUES (?,?) RETURNING *',
-  [name, calories]
-  ).then((food) => {res.status(201).json(food.rows)
+  [name, calories])
+  .then((food) => {
+    res.status(201).json(food.rows)
+  })
+})
+
+
+
+
+module.exports = router;
 
   // postgres.client.query(sql, data, function(err, result) {
   //   if (err) {
@@ -44,8 +54,7 @@ let calories = req.body.calories
       // res.statusCode = 201;
       // // The result of CREATE should be the same as GET
       // res.json(result.rows[0]);
-  });
-});
+
 
 // router.post('/', function(req, res, next) {
 //
@@ -62,6 +71,3 @@ let calories = req.body.calories
 //   res.status(201).json(food.rows)
 // });
 // });
-
-
-module.exports = router;

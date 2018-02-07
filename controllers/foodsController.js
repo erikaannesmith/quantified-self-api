@@ -30,9 +30,23 @@ function show(req, res, next) {
       res.json(food)
     }
   })
+}
 
+function destroy(req, res, next) {
+  let id = req.params.id
+
+  Food.find(id)
+  .then(food => {
+    if (!food) {
+      return res.sendStatus(404)
+    } else {
+      Food.destroy(id)
+      return res.sendStatus(200)
+    }
+  })
 }
 
 
 
-module.exports = {index, create, show}
+
+module.exports = {index, create, show, destroy}

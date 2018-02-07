@@ -22,6 +22,12 @@ var Food = {
   .then(function(food) {
       return food.rows[0]
   })
+  },
+  destroy: function(id) {
+  return database.raw('DELETE FROM foods WHERE id = ?', [id])
+  .then(function(food){
+    return food
+  })
   }
 }
 

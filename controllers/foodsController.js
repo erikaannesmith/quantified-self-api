@@ -12,7 +12,7 @@ function index(req, res, next) {
 function create(req, res, next) {
   let name = req.body.name
   let calories = req.body.calories
-  if(!name) {
+  if(!name || !calories) {
     return res.status(422).send({error: "Both name and calories are required fields."})
   }
   Food.new(name, calories)

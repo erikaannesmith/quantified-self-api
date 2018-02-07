@@ -10,16 +10,12 @@ function index(req, res, next) {
 }
 
 function create(req, res, next) {
-eval(pry.it)
-
   let name = req.body.name
   let calories = req.body.calories
   if(!name) {
     return res.status(422).send({error: "Both name and calories are required fields."})
   }
-
-  database.raw('INSERT INTO foods (name, calories) VALUES (?,?) RETURNING *',
-  [name, calories])
+  Food.new(name, calories)
   .then((food) => {
     res.status(201).json(food)
   })
@@ -27,4 +23,4 @@ eval(pry.it)
 
 
 
-module.exports = {index}
+module.exports = {index, create}

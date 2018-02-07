@@ -6,7 +6,15 @@ var Food = {
   all: database.raw('SELECT * FROM foods')
   .then(foods => {
     return foods.rows
+  }),
+    new: function(name, calories) {
+    return database.raw('INSERT INTO foods (name, calories) VALUES (?,?) RETURNING *',
+    [name, calories])
+
+  .then(function(food) {
+    return food.rows[0]
   })
+  }
 }
 
 module.exports = Food;

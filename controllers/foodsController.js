@@ -1,5 +1,3 @@
-pry = require('pryjs')
-
 var Food = require('../models/food')
 
 function index(req, res, next) {

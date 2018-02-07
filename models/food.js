@@ -24,6 +24,13 @@ var Food = {
   })
   },
 
+  destroy: function(id) {
+  return database.raw('DELETE FROM foods WHERE id = ?', [id])
+  .then(function(food){
+    return food
+    })
+  },
+
   edit: function(id, name, calories) {
     return database.raw('UPDATE foods SET name = ?, calories = ? WHERE id = ?', [name, calories, id])
   .then(function(food) {

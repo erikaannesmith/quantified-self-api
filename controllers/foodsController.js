@@ -32,10 +32,24 @@ function show(req, res, next) {
   })
 }
 
+function destroy(req, res, next) {
+  let id = req.params.id
+
+  Food.find(id)
+  .then(food => {
+    if (!food) {
+      return res.sendStatus(404)
+    } else {
+      Food.destroy(id)
+      return res.sendStatus(200)
+    }
+  })
+}
+
 function update(req, res, next) {
   let id = req.params.id
   let name = req.body.name
-  let calories = req.body.calories  
+  let calories = req.body.calories
   if (!name || !calories) {
     return res.status(400).send({ error: "Both name and calories are required fields." })
   }
@@ -54,4 +68,5 @@ function update(req, res, next) {
   })
 }
 
-module.exports = {index, create, show, update}
+
+module.exports = {index, create, show, destroy, update}

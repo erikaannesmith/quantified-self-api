@@ -7,6 +7,18 @@ function index(req, res, next) {
     })
 }
 
+function create(req, res, next) {
+  let name = req.body.name
+  let calories = req.body.calories
+  if(!name || !calories) {
+    return res.status(422).send({error: "Both name and calories are required fields."})
+  }
+  Food.new(name, calories)
+  .then((food) => {
+    res.status(201).json(food)
+  })
+}
+
 function show(req, res, next) {
   let id = req.params.id
 
@@ -21,4 +33,6 @@ function show(req, res, next) {
 
 }
 
-module.exports = {index, show}
+
+
+module.exports = {index, create, show}

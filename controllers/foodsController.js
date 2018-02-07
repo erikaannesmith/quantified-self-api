@@ -30,9 +30,24 @@ function show(req, res, next) {
       res.json(food)
     }
   })
-
 }
 
+function update(req, res, next) {
+  let id = req.params.id
+  let name = req.body.name
+  let calories = req.body.calories  
+  if (!name || !calories) {
+    return res.status(400).send({ error: "Both name and calories are required fields." })
+  }
 
+  Food.edit(id, name, calories)
+  .then(food => {
+    if (!food) {
+      return res.sendStatus(400)
+    } else {
+      res.json(food)
+    }
+  })
+}
 
-module.exports = {index, create, show}
+module.exports = {index, create, show, update}

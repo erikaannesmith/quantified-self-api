@@ -22,6 +22,13 @@ var Food = {
   .then(function(food) {
       return food.rows[0]
   })
+  },
+
+  edit: function(id, name, calories) {
+    return database.raw('UPDATE foods SET name = ?, calories = ? WHERE id = ?', [name, calories, id])
+  .then(function(food) {
+    return food
+  })
   }
 }
 

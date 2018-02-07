@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const environment = process.env.NODE_ENV || 'development'
+const configuration = require('../../../knexfile')[environment]
+const database = require('knex')(configuration)
+const foodsController = require('../../../controllers/foodsController')
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get('/', foodsController.index);
 
 module.exports = router;

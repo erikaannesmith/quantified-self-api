@@ -44,8 +44,12 @@ function update(req, res, next) {
   .then(food => {
     if (!food) {
       return res.sendStatus(400)
-    } else {
-      res.json(food)
+    }
+     else {
+      Food.find(id)
+      .then(editedFood => {
+        res.json(editedFood)
+      })
     }
   })
 }

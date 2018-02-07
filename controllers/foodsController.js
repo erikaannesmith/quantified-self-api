@@ -7,4 +7,18 @@ function index(req, res, next) {
     })
 }
 
-module.exports = {index}
+function show(req, res, next) {
+  let id = req.params.id
+
+  Food.find(id)
+  .then(food => {
+    if (!food) {
+      return res.sendStatus(404)
+    } else {
+      res.json(food)
+    }
+  })
+
+}
+
+module.exports = {index, show}

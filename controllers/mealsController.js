@@ -40,11 +40,8 @@ function destroy(req, res, next) {
   let mealId = req.params.mealId
   let foodId = req.params.foodId
   Meal.findFoodMeal(mealId, foodId)
-
   .then(mealFood => {
-
-    if (mealFood === '[]') {
-
+    if (mealFood === 0) {
       return res.sendStatus(404)
     } else {
       Meal.destroy(mealId, foodId)
@@ -52,14 +49,5 @@ function destroy(req, res, next) {
     }
   })
 }
-
-  //
-  // .then(mealFood => {
-  //   if (!mealFood) {
-  //     return res.sendStatus(404)
-  //   } else {
-  //     return res.sendStatus(200)
-  //   }
-  // })
 
 module.exports = {show, create, destroy, index}

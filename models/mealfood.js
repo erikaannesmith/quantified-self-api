@@ -5,7 +5,6 @@ const database = require('knex')(configuration)
 
 var MealFood = {
   new: function(meal, food) {
-<<<<<<< HEAD
     return database.raw('INSERT INTO mealfoods (meal, food) VALUES (?,?) RETURNING *',
     [meal, food])
 
@@ -14,19 +13,6 @@ var MealFood = {
   })
   },
 
-=======
-    return database.raw('INSERT INTO food (meal, food) VALUES (?,?) RETURNING *',
-    [meal, food])
-
-  .then(function(mealfood) {
-    return food.rows
-  })
-  },
-
-
-}
-
->>>>>>> get-one-meal
 }
 
 module.exports = MealFood;

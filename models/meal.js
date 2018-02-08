@@ -21,7 +21,14 @@ var Meal = {
       .then(function(meal) {
         return meal.rows[0]
       })
-    }
+    },
+
+  deleteMealFood: function(mealId, foodId){
+    return database.raw('DELETE FROM foodMeals WHERE foodmeals.meal = ? AND foodmeals.food =?' [mealId, foodId])
+    .then(function(mealFood){
+    return mealFood
+  })
+  }
 }
 
 module.exports = Meal;

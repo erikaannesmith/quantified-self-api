@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
     food INT,
     FOREIGN KEY(food) REFERENCES foods(id) ON UPDATE CASCADE ON DELETE CASCADE,
     meal INT,
-    FOREIGN KEY(meal) REFERENCES meals(id) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY(meal) REFERENCES meals(id) 
   )`
   return knex.raw(createQuery)
 

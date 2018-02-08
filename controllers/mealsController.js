@@ -1,4 +1,3 @@
-var MealFood = require('../models/mealFood')
 var Meal = require('../models/meal')
 
 
@@ -40,14 +39,27 @@ function create(req, res, next) {
 function destroy(req, res, next) {
   let mealId = req.params.mealId
   let foodId = req.params.foodId
+  Meal.findFoodMeal(mealId, foodId)
 
-  Meal.deleteMealFood(mealId, foodId)
   .then(mealFood => {
-    if (!mealFood) {
+
+    if (mealFood === '[]') {
+
       return res.sendStatus(404)
     } else {
+      Meal.destroy(mealId, foodId)
       return res.sendStatus(200)
     }
   })
 }
+
+  //
+  // .then(mealFood => {
+  //   if (!mealFood) {
+  //     return res.sendStatus(404)
+  //   } else {
+  //     return res.sendStatus(200)
+  //   }
+  // })
+
 module.exports = {show, create, destroy, index}

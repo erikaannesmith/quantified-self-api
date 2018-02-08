@@ -26,27 +26,35 @@ var Meal = {
     return database.raw(`SELECT foods.id, foods.name, foods.calories FROM foods
       INNER JOIN foodMeals on foods.id=foodmeals.food
       WHERE foodMeals.meal=?`, [mealId])
-      .then(function(foods) {
-        return foods.rows
-      })
+    .then(function(foods) {
+      return foods.rows
+    })
+  },
 
-    },
+  new: function(mealId, foodId){
+    return database.raw('INSERT INTO foodMeals (meal, food) VALUES (?,?) RETURNING *',
+    [mealId, foodId])
+    .then(function(meal) {
+      return meal.rows[0]
+    })
+  },
 
-    new: function(mealId, foodId){
-      return database.raw('INSERT INTO foodMeals (meal, food) VALUES (?,?) RETURNING *',
-      [mealId, foodId])
-
-      .then(function(meal) {
-        return meal.rows[0]
-      })
-    },
-
-  deleteMealFood: function(mealId, foodId){
-    return database.raw('DELETE FROM foodMeals WHERE foodmeals.meal = ? AND foodmeals.food =?' [mealId, foodId])
+  destroy: function(mealId, foodId){
+    return database.raw('DELETE FROM foodMeals WHERE foodMeals.meal = ? AND foodMeals.food =?',
+    [mealId, foodId])
     .then(function(mealFood){
-    return mealFood
-  })
-  }
+      return mealFood
+    })
+  },
+  findFoodMeal:function(mealId, foodId){
+    return database.raw('SELECT * FROM foodMeals WHERE foodMeals.meal = ? AND foodMeals.food =?',
+    [mealId, foodId])
+    .then(function(mealFood){
+      return mealFood.rows
+
+
+    })
+}
 
 }
 

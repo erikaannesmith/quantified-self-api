@@ -50,13 +50,4 @@ function destroy(req, res, next) {
   })
 }
 
-  //
-  // .then(mealFood => {
-  //   if (!mealFood) {
-  //     return res.sendStatus(404)
-  //   } else {
-  //     return res.sendStatus(200)
-  //   }
-  // })
-
 module.exports = {show, create, destroy, index}

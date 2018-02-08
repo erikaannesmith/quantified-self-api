@@ -2,8 +2,26 @@ const environment = process.env.NODE_ENV || 'development'
 const configuration = require('../knexfile')[environment]
 const database = require('knex')(configuration)
 
-
 var Meal = {
+
+  all:
+  database.raw('SELECT * FROM meals;')
+  .then((meals) => {
+    return Promise.all(
+      meals.rows.map(function(meal) {
+        let id = meal.id
+        return database.raw('SELECT meals.id, meals.name, foods.* from meals join foodMeals ON meals.id = foodMeals.meal join foods on foods.id = foodMeals.food WHERE meals.id = ?;', [id])
+        .then(foods => {
+          let mealWithFoods = {id: meal.id, name: meal.name, foods: foods.rows}
+          return mealWithFoods
+        })
+      })
+    )
+    .then(allmeals => {
+      return allmeals
+    })
+  }),
+
   find: function(mealId) {
     return database.raw(`SELECT foods.id, foods.name, foods.calories FROM foods
       INNER JOIN foodMeals on foods.id=foodmeals.food
@@ -29,6 +47,7 @@ var Meal = {
     return mealFood
   })
   }
+
 }
 
 module.exports = Meal;

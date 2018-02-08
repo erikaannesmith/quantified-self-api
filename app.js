@@ -11,8 +11,6 @@ var users = require('./routes/users');
 var foods = require('./routes/api/v1/foods');
 var meals = require('./routes/api/v1/meals');
 
-
-
 var app = express();
 
 // view engine setup

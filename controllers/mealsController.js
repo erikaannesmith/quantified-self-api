@@ -1,6 +1,14 @@
 var MealFood = require('../models/mealFood')
 var Meal = require('../models/meal')
 
+
+function index(req, res, next) {
+  Meal.all
+  .then((meals) => {
+    res.status(201).json(meals)
+  })
+}
+
 function show(req, res, next) {
   let mealId = req.params.mealId
 
@@ -42,4 +50,4 @@ function destroy(req, res, next) {
     }
   })
 }
-module.exports = {show, create, destroy}
+module.exports = {show, create, destroy, index}

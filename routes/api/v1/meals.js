@@ -8,7 +8,7 @@ const foods = require('../../../models/food')
 
 router.get('/:mealId/foods', mealsController.show);
 
-// router.post('/', mealsController.create);
+router.post('/:mealId/foods/:foodId', mealsController.create);
 // router.delete('/:id', mealsController.destroy);
 
 

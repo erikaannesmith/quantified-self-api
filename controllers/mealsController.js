@@ -12,4 +12,19 @@ function show(req, res, next) {
     }
   })
 }
-module.exports = {show}
+
+function create(req, res, next) {
+  let mealId = req.params.mealId
+  let foodId = req.params.foodId
+
+  Meal.new(mealId, foodId)
+  .then(meal => {
+    if (!meal) {
+      return res.sendStatus(404)
+    } else {
+      res.json(meal)
+
+    }
+  })
+}
+module.exports = {show, create}

@@ -1,8 +1,8 @@
-#Welcome to Quantified Self API!
+# Welcome to Quantified Self API!
 
- ##The following endpoints are available. All endpoints will return the data as JSON.
+ ## The following endpoints are available. All endpoints will return the data as JSON.
 
-   ###Food Endpoints:
+   ### Food Endpoints:
         `GET /api/v1/foods` - returns all foods currently in the database
 
         `GET /api/v1/foods/:id` - returns the food object with the specific `:id` you've passed in or 404 if the food is not found
@@ -13,7 +13,7 @@
 
         `DELETE /api/v1/foods/:id` - will delete the food with the id passed in. If the food can't be found, a 404 will be returned.
 
-   ###Meal Endpoints:
+   ### Meal Endpoints:
       
         `GET /api/v1/meals` - returns all the meals in the database along with their associated foods
 

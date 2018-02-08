@@ -9,12 +9,9 @@ var MealFood = {
     [meal, food])
 
   .then(function(mealfood) {
-    return food.rows
+    return food.rows[0]
   })
   },
-
-
-}
 
 }
 

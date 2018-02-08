@@ -41,7 +41,7 @@ function destroy(req, res, next) {
   let foodId = req.params.foodId
   Meal.findFoodMeal(mealId, foodId)
   .then(mealFood => {
-    if (mealFood == 0) {
+    if (mealFood === 0) {
       return res.sendStatus(404)
     } else {
       Meal.destroy(mealId, foodId)

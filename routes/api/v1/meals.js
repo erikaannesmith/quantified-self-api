@@ -6,7 +6,7 @@ const database = require('knex')(configuration)
 const mealsController = require('../../../controllers/mealsController')
 const foods = require('../../../models/food')
 
-router.get('/:modelId/foods', mealsController.show);
+router.get('/:mealId/foods', mealsController.show);
 
 // router.post('/', mealsController.create);
 // router.delete('/:id', mealsController.destroy);

@@ -4,15 +4,15 @@ const database = require('knex')(configuration)
 
 
 var MealFood = {
-  // new: function(meal, food) {
-  //   return database.raw('INSERT INTO mealfoods (meal, food) VALUES (?,?) RETURNING *',
-  //   [meal, food])
-  //
-  // .then(function(mealfood) {
-  //   return food.rows[0]
-  // })
-  // },
-  
+  new: function(meal, food) {
+    return database.raw('INSERT INTO mealfoods (meal, food) VALUES (?,?) RETURNING *',
+    [meal, food])
+
+  .then(function(mealfood) {
+    return food.rows
+  })
+  },
+
 
 }
 

@@ -4,16 +4,16 @@ const database = require('knex')(configuration)
 
 
 var Meal = {
-find: function(id) {
- return database.raw(`SELECT meals.name, meals.id, foods.name, foods.calories FROM meals
-                      INNER JOIN foodMeals on meals.id=foodmeals.meal
-                      INNER JOIN foods on foods.id=foodmeals.food WHERE meals.id=?`, [id])
-.then(function(meal) {
-    return meal.rows[0]
+find: function(mealId) {
+ return database.raw(`SELECT foods.id, foods.name, foods.calories FROM foods
+                      INNER JOIN foodMeals on foods.id=foodmeals.food
+                      WHERE foodMeals.meal=?`, [mealId])
+.then(function(foods) {
+    return foods.rows
 })
+
+
 }
-
-
 }
 
 module.exports = Meal;

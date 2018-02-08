@@ -11,6 +11,10 @@ var users = require('./routes/users');
 var foods = require('./routes/api/v1/foods');
 var meals = require('./routes/api/v1/meals');
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> get-one-meal
 
 var app = express();
 
@@ -36,6 +40,10 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/api/v1/foods', foods);
 app.use('/api/v1/meals', meals);
+<<<<<<< HEAD
+=======
+
+>>>>>>> get-one-meal
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

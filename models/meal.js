@@ -4,8 +4,8 @@ const database = require('knex')(configuration)
 
 var Meal = {
 
-  all:
-  database.raw('SELECT * FROM meals;')
+  all: function(){
+  return database.raw('SELECT * FROM meals;')
   .then((meals) => {
     return Promise.all(
       meals.rows.map(function(meal) {
@@ -20,7 +20,8 @@ var Meal = {
     .then(allmeals => {
       return allmeals
     })
-  }),
+  })
+},
 
   find: function(mealId) {
     return database.raw(`SELECT foods.id, foods.name, foods.calories FROM foods

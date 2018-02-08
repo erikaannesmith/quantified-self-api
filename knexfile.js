@@ -30,9 +30,9 @@ module.exports = {
       directory: './db/migrations'
     },
     ssl: true
-    seeds: {
-      directory: './db/seeds/production'
-    },
+    // seeds: {
+    //   directory: './db/seeds/production'
+    // },
     useNullAsDefault: true
   }
 }

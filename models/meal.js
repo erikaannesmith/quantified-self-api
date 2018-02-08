@@ -46,7 +46,7 @@ var Meal = {
       return mealFood
     })
   },
-  
+
   findFoodMeal:function(mealId, foodId){
     return database.raw('SELECT * FROM foodMeals WHERE foodMeals.meal = ? AND foodMeals.food =?',
     [mealId, foodId])
